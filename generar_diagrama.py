@@ -72,6 +72,7 @@ distancia_entre_cajitas = 0.5
 margen = 10
 margen_superior = 40
 start_y = margen_superior
+salto_entre_bloques = 7
 
 
 def cajas(cantidad, texto, style, offset_x=0, offset_y=0):
@@ -79,7 +80,7 @@ def cajas(cantidad, texto, style, offset_x=0, offset_y=0):
 	group=G()
 	drawpage.addElement(group)
 	for i in range(cantidad):
-		x = margen +offset_x +  (i % maximas_cajitas_por_linea)*(1+distancia_entre_cajitas)
+		x = margen +offset_x +    (maximas_cajitas_por_linea - i % maximas_cajitas_por_linea)*(1+distancia_entre_cajitas)
 		y = start_y + offset_y + (math.floor(i/maximas_cajitas_por_linea)) * (1+distancia_entre_cajitas)
 		group.addElement(Rect(height="1mm", width="1mm", x="{}mm".format(x), y="{}mm".format(y), stylename=style))
 	x = margen + maximas_cajitas_por_linea * (1+distancia_entre_cajitas)
@@ -88,8 +89,8 @@ def cajas(cantidad, texto, style, offset_x=0, offset_y=0):
 	textbox = TextBox()
 	titleframe.addElement(textbox)
 	textbox.addElement(P(text=texto))
-	start_y += (math.floor(cantidad/maximas_cajitas_por_linea)) * (1+distancia_entre_cajitas) + 4
-	height = (math.ceil(cantidad/maximas_cajitas_por_linea)) * (1+distancia_entre_cajitas) + 4
+	start_y += (math.floor(cantidad/maximas_cajitas_por_linea)) * (1+distancia_entre_cajitas) + salto_entre_bloques
+	height = (math.ceil(cantidad/maximas_cajitas_por_linea)) * (1+distancia_entre_cajitas) + salto_entre_bloques
 	return height
 
 
@@ -115,10 +116,10 @@ lukas(600, u"Sueldo Promedio")
 offset = lukas(1000, u"1 Palo = ")
 
 start_y -= offset
-palos(1, u"", 65)
+palos(1, u"", 32)
 
 start_y = margen_superior
-palos(1, u"1 Palo")
+palos(1, u"1 Pa	o")
 palos(1, u"Sueldo Secretaria")
 palos(4, u"Sueldo Ejecutivo")
 palos(9, u"Sueldo Gerente")
@@ -134,11 +135,13 @@ palos(374, u"Costo anual de un senador")
 
 offset = palos(670, u"1 Palo Verde = ")
 start_y -= offset
-palos_verdes(1, u"", 150 )
+palos_verdes(1, u"", 111 )
 
 start_y = margen_superior
 palos_verdes(1, u"1 Palo Verde")
 palos_verdes(4, u"La media casa en La Dehesa")
+palos_verdes(10, u"Financiamiento público a Partidos Políticos")
+palos_verdes(47, u"Recaudación de la Teletón")
 palos_verdes(53, u"Presupuesto anual del Hogar de Cristo")
 palos_verdes(182, u"Costo anual del Congreso")
 palos_verdes(211, u"Presupuesto anual Junji")
@@ -149,7 +152,7 @@ offset = palos_verdes(1000, u"1000 millones de USD = ")
 
 
 start_y -= offset
-billones_verdes(1, u"",283 )
+billones_verdes(1, u"",242 )
 
 
 start_y = margen_superior
@@ -163,7 +166,7 @@ billones_verdes(4, u"Patrimonio de Horst Paulmann")
 billones_verdes(14, u"Patrimonio de Andronico Luksic")
 billones_verdes(60, u"Gasto público anual del estado")
 billones_verdes(150, u"Patrimonio de Jeff Bezos")
-billones_verdes(170, u"Inversiones del sistema de AFPs")
+billones_verdes(170, u"Fondos de Pensiones via AFP")
 billones_verdes(223, u"PIB anual de Chile")
 
 
